@@ -1,0 +1,12 @@
+name = "sociabuzz-roblox"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[vars]
+SOCIA_VERIFY_MODE = "TOKEN"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "sociabuzz-roblox"
+database_id = "562198b1-894e-4781-8573-b09d72ec4fc1"
