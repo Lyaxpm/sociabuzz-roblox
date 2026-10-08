@@ -4,9 +4,9 @@ compatibility_date = "2026-10-01"
 workers_dev = true
 
 [vars]
-SOCIA_VERIFY_MODE = "TOKEN"
+SOCIA_VERIFY_MODE = "sbwhook-r8ka2auhtsqjdkgnxwmzp7ty"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "sociabuzz-roblox"
-database_id = "562198b1-894e-4781-8573-b09d72ec4fc1"
+database_name = "project-roblox"
+database_id = "62e75441-29d8-4997-a58d-8fa40a69a2df"
