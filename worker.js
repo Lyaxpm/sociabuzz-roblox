@@ -481,27 +481,37 @@ async function handleDisconnect(request, env) {
 // implementasi integrasi SociaBuzz.
 
 function providedToken(request, body) {
-  const auth =
-    request.headers.get("authorization") || "";
+  const auth = request.headers.get("authorization") || "";
 
   const bearer =
     /^Bearer\s+(.+)$/i.exec(auth)?.[1]?.trim() || "";
 
-  return (
-    request.headers.get("x-sociabuzz-webhook-token") ||
-    request.headers.get("x-sociabuzz-token") ||
-    request.headers.get("x-webhook-token") ||
-    bearer ||
-    firstValue(candidates(body), [
-      "webhook_token",
-      "webhookToken",
-      "sociabuzz_webhook_token",
-      "sociabuzzWebhookToken",
-      "sociabuzz_token",
-      "token",
-    ]) ||
-    ""
-  );
+  const headerNames = [
+    "sb-webhook-token",
+    "x-sociabuzz-webhook-token",
+    "x-sociabuzz-token",
+    "x-webhook-token"
+  ];
+
+  for (const name of headerNames) {
+    const value = request.headers.get(name);
+    if (value && value.trim()) {
+      return value.trim();
+    }
+  }
+
+  const bodyToken = firstValue(candidates(body), [
+    "sb-webhook-token",
+    "sb_webhook_token",
+    "webhook_token",
+    "webhookToken",
+    "sociabuzz_webhook_token",
+    "sociabuzzWebhookToken",
+    "sociabuzz_token",
+    "token"
+  ]);
+
+  return String(bodyToken || bearer || "").trim();
 }
 
 function isPaymentEvent(body) {
